@@ -2,15 +2,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgre
+  name: postgres
 spec:
   selector:
     matchLabels:
-      app: postgre
+      app: postgres
   template:
     metadata:
       labels:
-        app: postgre
+        app: postgres
     spec:
       containers:
         - name: postgre
@@ -28,24 +28,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgre
+  name: postgres
 spec:
   selector:
-    app: postgre
+    app: postgres
   ports:
   - port: 5432
     targetPort: 5432
-
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-kubenews
 spec:
-<<<<<<< HEAD
   replicas: 20
-=======
->>>>>>> 2953bd2d8747a481c2567ddee5c2dd11c019a334
   selector:
     matchLabels:
       app: devops-kubenews
@@ -56,11 +52,7 @@ spec:
     spec:
       containers:
       - name: devops-kubenews
-<<<<<<< HEAD
         image: vesteves33/kube-news:v2
-=======
-        image: vesteves33/kube-news:v1
->>>>>>> 2953bd2d8747a481c2567ddee5c2dd11c019a334
         env:
         - name: DB_DATABASE 
           value: "kubenews"
@@ -69,7 +61,7 @@ spec:
         - name: DB_PASSWORD
           value: "Kubenews-devops123"
         - name: DB_HOST
-          value: "postgre"
+          value: "postgres"
 ---
 apiVersion: v1
 kind: Service
@@ -82,9 +74,6 @@ spec:
   - port: 80
     targetPort: 8080
     nodePort: 30000
-<<<<<<< HEAD
   type: LoadBalancer
-=======
-  type: NodePort
->>>>>>> 2953bd2d8747a481c2567ddee5c2dd11c019a334
+
 
